@@ -1,0 +1,17 @@
+Authentication Filter
+Filtro para autenticar el usuario en el sistema,
+se especifica el tipo de autenticacion que el sistema utiliza 
+para iniciar sesion, en nuestro caso con usuario y contraseña y se
+genera el token JWT. Busca en la base de datos el usuario y contraseña, si es correcto
+genera el token y lo regresa
+
+Authorization Filter
+Filtro para autorizar el usuario dentro del sistema, cuando se envia el token,
+este filtro debe validar que el token sea un token valido y que haya sido firmado con el algoritmo y clave secreta de la aplicacion. Valida si el token enviado en la peticion es correcto
+
+diferencia entre spring security jwt con la dependencia que usas de jjwt es
+Con esta dependencia evitamos escribir una gran cantidad de código boilerplate para generar y comprobar los tokens
+
+Using generated security password: 88685ade-db1e-4c3c-b741-ec670ef2f0a2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.

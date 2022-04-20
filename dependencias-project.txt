@@ -1,0 +1,28 @@
+spring dependencias
+Spring Web WEB
+Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
+MySQL Driver SQL
+MySQL JDBC and R2DBC driver.
+H2 Database SQL
+Provides a fast in-memory database that supports JDBC API and R2DBC access, with a small (2mb) footprint. Supports embedded and server modes as well as a browser based console application.
+Lombok DEVELOPER TOOLS
+Java annotation library which helps to reduce boilerplate code.
+
+extensiones visual code
+Language Support for Java
+Debugger for Java
+Maven for Java -
+Test Runner for Java -
+Project Manager for Java
+Extension Pack for Java
+Spring Initializr Java Support
+Spring Boot Tools
+Spring Boot Dashboard
+Spring Boot Extension Pack
+
+reactive
+JavaScript (ES6) code snippets
+JavaScript and TypeScript Nightly
+ES7+ React/Redux/React-Native snippets
+React Native Tools
+Simple React Snippets
