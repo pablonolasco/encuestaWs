@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.github.javafaker.Faker;
+
 import mx.com.udemy.encuestasBackend.security.AppProperties;
 
 @SpringBootApplication
@@ -23,6 +25,7 @@ public class EncuestasBackendApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 	
 	/**
 	 * Bean global para poder acceder a las variables de configuracion del archivo application.properties
