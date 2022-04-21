@@ -21,7 +21,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 import mx.com.udemy.encuestasBackend.dto.UsuarioLoginDTO;
 import mx.com.udemy.encuestasBackend.dto.UsuarioRegistroDTO;
+import mx.com.udemy.encuestasBackend.entities.Usuario;
 import mx.com.udemy.encuestasBackend.repository.IUsuarioRepository;
+import mx.com.udemy.encuestasBackend.response.UsuarioRespuesta;
 import mx.com.udemy.encuestasBackend.services.IUserService;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

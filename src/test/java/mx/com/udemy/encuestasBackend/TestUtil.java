@@ -10,7 +10,10 @@ import mx.com.udemy.encuestasBackend.security.SecurityConstants;
 public class TestUtil {
 
 	
-	
+	/**
+	 * 
+	 * @return usuarioRegistroDTO {@link UsuarioRegistroDTO} objeto creado
+	 */
 	public static UsuarioRegistroDTO crearUsuarioRegistroDTO() {
 		UsuarioRegistroDTO usuarioRegistroDTO= new UsuarioRegistroDTO();
 		usuarioRegistroDTO.setEmail(SecurityConstants.getFackerDatos().name().username()+"@gmail.com");

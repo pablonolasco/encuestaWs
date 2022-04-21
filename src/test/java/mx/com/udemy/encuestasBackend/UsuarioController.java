@@ -168,28 +168,79 @@ public class UsuarioController {
 		assertEquals(responseEntity.getStatusCode(), HttpStatus.FORBIDDEN);
 	}
 	
+	@Test
+	public void getUsuario_conToken_Autenthicacion_retornaUsuarioRespuestaOK() {
+		UsuarioRegistroDTO usuarioRegistroDTO=TestUtil.crearUsuarioRegistroDTO();
+		userService.crearUsuario(usuarioRegistroDTO);
+		UsuarioLoginDTO usuario=new UsuarioLoginDTO();
+		usuario.setEmail(usuarioRegistroDTO.getEmail());
+		usuario.setPassword(usuarioRegistroDTO.getPassword());
+		ResponseEntity<Map<String, String>>responseEntity= login(usuario, 
+				new ParameterizedTypeReference<Map<String,String>>() {});
+		Map<String, String>body=responseEntity.getBody();
+		String token= body.get("token").replace("Bearer", "");
+		
+		ResponseEntity<UsuarioRespuesta>response= getUsuario(token, new ParameterizedTypeReference<UsuarioRespuesta>() {
+		});
+		
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}
+	
+	@Test
+	public void getUsuario_conToken_Autenthicacion_retornaUsuarioRespuesta() {
+		UsuarioRegistroDTO usuarioRegistroDTO=TestUtil.crearUsuarioRegistroDTO();
+		userService.crearUsuario(usuarioRegistroDTO);
+		UsuarioLoginDTO usuario=new UsuarioLoginDTO();
+		usuario.setEmail(usuarioRegistroDTO.getEmail());
+		usuario.setPassword(usuarioRegistroDTO.getPassword());
+		ResponseEntity<Map<String, String>>responseEntity= login(usuario, 
+				new ParameterizedTypeReference<Map<String,String>>() {});
+		Map<String, String>body=responseEntity.getBody();
+		String token= body.get("token").replace("Bearer", "");
+		
+		ResponseEntity<UsuarioRespuesta>response= getUsuario(token, new ParameterizedTypeReference<UsuarioRespuesta>() {
+		});
+		
+		assertEquals(usuarioRegistroDTO.getNombre(), response.getBody().getNombre());
+	}
+	
 	/**
-	 * Metodo para enviar peticion a url login
-	 * @param <T>
-	 * @param data
-	 * @param responseType
-	 * @return
+	 * Metodo para enviar la peticion a la url users 
+	 * @param <T> the type of the return value
+	 * @param token
+	 * @param responseType the type of the return value
+	 * @return the response as entity
 	 */
-	public <T> ResponseEntity<T> login(String token, ParameterizedTypeReference<T> responseType) {
+	public <T> ResponseEntity<T> getUsuario(String token, ParameterizedTypeReference<T> responseType) {
 		HttpHeaders headers= new HttpHeaders();
 		headers.setBearerAuth(token);
 		HttpEntity<Object> entity = new HttpEntity<Object>(null, headers);
+		return testTestTemplate.exchange(API_URL, HttpMethod.GET, entity, responseType);
+	}
+
+	/**
+	 * Metodo para enviar la peticion a la url login 
+	 * Execute the HTTP method to the given URI template, writing the given request entity
+	 * to the request, and returns the response as {@link ResponseEntity}.
+	 * @param <T> the type of the return value
+	 * @param usuarioLoginDTO {@link UsuarioLoginDTO} the entity (headers and/or body) to write to the request, may
+	 * be {@code null}
+	 * @param responseType the type of the return value
+	 * @return the response as entity
+	 */
+	public <T> ResponseEntity<T> login(UsuarioLoginDTO usuarioLoginDTO, ParameterizedTypeReference<T> responseType) {
+		HttpEntity<Object> entity = new HttpEntity<Object>(usuarioLoginDTO, new HttpHeaders());
 		return testTestTemplate.exchange(API_LOGIN_URL, HttpMethod.POST, entity, responseType);
 	}
 
-
 	/**
-	 * Metodo para enviar peticion a url registro
-	 * 
+	 * Metodo para enviar peticion a url login para su registro
+	 * Create a new resource by POSTing the given object to the URI template, and returns
+	 * the response as {@link ResponseEntity}.
 	 * @param <T>
-	 * @param data
-	 * @param responseType
-	 * @return
+	 * @param data {@link UsuarioRegistroDTO} request the Object to be POSTed, may be {@code null}
+	 * @param responseType {@link responseType} the type of the return value
+	 * @return testTestTemplate 
 	 */
 	public <T> ResponseEntity<T> register(UsuarioRegistroDTO data, Class<T> responseType) {
 		return testTestTemplate.postForEntity(API_URL, data, responseType);
