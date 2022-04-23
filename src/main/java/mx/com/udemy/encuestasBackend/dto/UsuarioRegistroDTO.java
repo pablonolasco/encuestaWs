@@ -22,8 +22,8 @@ public class UsuarioRegistroDTO {
 	@UniqueEmail
 	private String email;
 
-	@NotEmpty
 	@Size(min =2 ,max=8)
+	@NotEmpty
 	private String password;
 
 
